@@ -2,7 +2,9 @@
 
 // 1. Create a variable to store the singleton instance of the bank branch. "bankBranchInstance"
 
+
 // 2. Define a class called `BankBranch` for managing branch information.
+
 
 // 3. In the `BankBranch` class:
 //    - Create a constructor that takes `branchInfo` as a parameter.
@@ -32,3 +34,34 @@
 // - The `getBranchInfo` method allows us to retrieve the branch information from the singleton instance.
 // - We demonstrate the Singleton pattern by creating two instances (`branchA` and `branchB`) and show that they both point to the same instance,
 //   ensuring that there is only one set of branch information throughout the application.
+
+
+
+
+class BankBranch {
+    constructor(branchInfo) {
+        // Check if bankBranchInstance is null
+        if (BankBranch.bankBranchInstance == null) {
+            // If it is null, create a new instance with the provided branchInfo
+            this.branchInfo = branchInfo;
+            // Assign the current instance to the bankBranchInstance
+            BankBranch.bankBranchInstance = this;
+        }
+        // Return the existing instance or the newly created instance
+        return BankBranch.bankBranchInstance;
+    }
+  
+    // Method to get branch information
+    getBranchInfo() {
+        return this.branchInfo;
+    }
+}
+  
+// Usage
+const branchA = new BankBranch({ name: "Branch A", location: "City A" });
+const branchB = new BankBranch({ name: "Branch B", location: "City B" });
+  
+console.log(branchA === branchB); // true, both instances refer to the same object
+  
+console.log(branchA.getBranchInfo()); // { name: "Branch A", location: "City A" }
+console.log(branchB.getBranchInfo()); // { name: "Branch A", location: "City A" }
